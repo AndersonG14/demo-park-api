@@ -33,8 +33,9 @@ public class UsuarioController {
             @ApiResponse(responseCode = "201", description = "Recurso criado com sucesso",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = UsuarioResponseDto.class))),
             @ApiResponse(responseCode = "409", description = "Usuário e-mail já cadastrado no sistema",
-            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)),
-            )
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
+            @ApiResponse(responseCode = "422", description = "Recurso não processado por dados de entrada inválidos",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
             }
 
     )
