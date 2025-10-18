@@ -8,6 +8,7 @@ import com.mballem.demo_park_api.web.dto.UsuarioSenhaDto;
 import com.mballem.demo_park_api.web.dto.mapper.UsuarioMapper;
 import com.mballem.demo_park_api.web.exception.ErrorMessage;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -77,6 +78,15 @@ public class UsuarioController {
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "Listar todos os usuários", description = "Listar todos os usuários",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Recursos encontrados com sucesso",
+                            content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = UsuarioResponseDto.class)))),
+                    @ApiResponse(responseCode = "404", description = "Recursos não encontrados",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
+            }
+
+    )
     @GetMapping
     public ResponseEntity<List<UsuarioResponseDto>> getAll(){
         List <Usuario> users = usuarioService.buscarTodos();
