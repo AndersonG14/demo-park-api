@@ -80,7 +80,7 @@ public class UsuarioController {
 
     @Operation(summary = "Listar todos os usuários", description = "Listar todos os usuários cadastrados",
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Recursos encontrados com sucesso",
+                    @ApiResponse(responseCode = "200", description = "Lista com todos os usuários cadastrados",
                             content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = UsuarioResponseDto.class)))),
                     @ApiResponse(responseCode = "404", description = "Recursos não encontrados",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
