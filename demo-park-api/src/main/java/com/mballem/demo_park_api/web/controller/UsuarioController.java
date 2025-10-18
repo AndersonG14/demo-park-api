@@ -78,7 +78,7 @@ public class UsuarioController {
         return ResponseEntity.noContent().build();
     }
 
-    @Operation(summary = "Listar todos os usuários", description = "Listar todos os usuários",
+    @Operation(summary = "Listar todos os usuários", description = "Listar todos os usuários cadastrados",
             responses = {
                     @ApiResponse(responseCode = "200", description = "Recursos encontrados com sucesso",
                             content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = UsuarioResponseDto.class)))),
