@@ -28,5 +28,11 @@ public class UsuarioIT {
                 .expectStatus().isCreated()
                 .expectBody(UsuarioResponseDto.class)
                 .returnResult().getResponseBody();
+
+        org.assertj.core.api.Assertions.assertThat(responseBody).isNotNull();
+        org.assertj.core.api.Assertions.assertThat(responseBody.getId()).isNotNull();
+        org.assertj.core.api.Assertions.assertThat(responseBody.getUsername()).isEqualTo("tody@email.com");
+        org.assertj.core.api.Assertions.assertThat(responseBody.getRole()).isEqualTo("CLIENTE");
+
     }
 }
