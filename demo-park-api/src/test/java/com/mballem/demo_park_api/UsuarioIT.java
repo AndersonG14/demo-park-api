@@ -133,7 +133,7 @@ public class UsuarioIT {
                 .post()
                 .uri("/api/v1/usuarios")
                 .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(new UsuarioCreateDto("jamilly@email.com", "123456"))
+                .bodyValue(new UsuarioCreateDto("ana@email.com", "123456"))
                 .exchange()
                 .expectStatus().isEqualTo(409)
                 .expectBody(ErrorMessage.class)
