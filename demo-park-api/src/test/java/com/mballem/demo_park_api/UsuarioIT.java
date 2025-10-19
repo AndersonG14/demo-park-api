@@ -21,7 +21,7 @@ public class UsuarioIT {
     public void createUsuario_ComUsernameEPasswordValidos_RetornarUsuarioCriadoComStatus201(){
         UsuarioResponseDto responseBody = testClient
                 .post()
-                .uri("/api/v1/Usuarios")
+                .uri("/api/v1/usuarios")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(new UsuarioCreateDto("tody@email.com", "123456"))
                 .exchange()
