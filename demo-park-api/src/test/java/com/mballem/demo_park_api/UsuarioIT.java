@@ -20,7 +20,7 @@ public class UsuarioIT {
     WebTestClient testClient;
 
     @Test
-    public void createUsuario_ComUsernameEPasswordValidos_RetornarUsuarioCriadoComStatus201(){
+    public void createUsuario_ComUsernameEPasswordValidos_RetornarUsuarioCriadoComStatus201() {
         UsuarioResponseDto responseBody = testClient
                 .post()
                 .uri("/api/v1/usuarios")
@@ -39,7 +39,7 @@ public class UsuarioIT {
     }
 
     @Test
-    public void createUsuario_ComUsernameInvalido_RetornarErrorMessageStatus422(){
+    public void createUsuario_ComUsernameInvalido_RetornarErrorMessageStatus422() {
         ErrorMessage responseBody = testClient
                 .post()
                 .uri("/api/v1/usuarios")
@@ -80,11 +80,10 @@ public class UsuarioIT {
         org.assertj.core.api.Assertions.assertThat(responseBody.getStatus()).isEqualTo(422);
 
 
-
     }
 
     @Test
-    public void createUsuario_ComPasswordInvalido_RetornarErrorMessageStatus422(){
+    public void createUsuario_ComPasswordInvalido_RetornarErrorMessageStatus422() {
         ErrorMessage responseBody = testClient
                 .post()
                 .uri("/api/v1/usuarios")
@@ -125,11 +124,10 @@ public class UsuarioIT {
         org.assertj.core.api.Assertions.assertThat(responseBody.getStatus()).isEqualTo(422);
 
 
-
     }
 
     @Test
-    public void createUsuario_ComUsernameRepetido_RetornarErrorMessageComStatus409(){
+    public void createUsuario_ComUsernameRepetido_RetornarErrorMessageComStatus409() {
         ErrorMessage responseBody = testClient
                 .post()
                 .uri("/api/v1/usuarios")
@@ -147,7 +145,7 @@ public class UsuarioIT {
     }
 
     @Test
-    public void buscarUsuario_ComIdExistente_RetornarUsuarioCriadoComStatus200(){
+    public void buscarUsuario_ComIdExistente_RetornarUsuarioCriadoComStatus200() {
         UsuarioResponseDto responseBody = testClient
                 .get()
                 .uri("/api/v1/usuarios/100")
@@ -164,7 +162,7 @@ public class UsuarioIT {
     }
 
     @Test
-    public void buscarUsuario_ComIdInexistente_RetornarErroMessageComStatus404(){
+    public void buscarUsuario_ComIdInexistente_RetornarErroMessageComStatus404() {
         ErrorMessage responseBody = testClient
                 .get()
                 .uri("/api/v1/usuarios/0")
@@ -178,12 +176,29 @@ public class UsuarioIT {
     }
 
     @Test
-    public void editarSenha_ComDadosValidos_RetornarStatus204(){
-       testClient
+    public void editarSenha_ComDadosValidos_RetornarStatus204() {
+        testClient
                 .patch()
                 .uri("/api/v1/usuarios/100")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(new UsuarioSenhaDto("123456", "123456", "123456"))
                 .exchange()
                 .expectStatus().isNoContent();
+    }
+
+    @Test
+    public void editarSenha_ComIdInexistente_RetornarErroMessageComStatus404() {
+        ErrorMessage responseBody = testClient
+                .patch()
+                .uri("/api/v1/usuarios/0")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(new UsuarioSenhaDto("123456", "123456", "123456"))
+                .exchange()
+                .expectStatus().isNotFound()
+                .expectBody(ErrorMessage.class)
+                .returnResult().getResponseBody();
+
+        org.assertj.core.api.Assertions.assertThat(responseBody).isNotNull();
+        org.assertj.core.api.Assertions.assertThat(responseBody.getStatus()).isEqualTo(404);
+    }
 }
