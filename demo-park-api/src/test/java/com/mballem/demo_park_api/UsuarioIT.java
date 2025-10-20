@@ -161,4 +161,18 @@ public class UsuarioIT {
         org.assertj.core.api.Assertions.assertThat(responseBody.getRole()).isEqualTo("ADMIN");
 
     }
+
+    @Test
+    public void buscarUsuario_ComIdInexistente_RetornarErroMessageComStatus404(){
+        ErrorMessage responseBody = testClient
+                .get()
+                .uri("/api/v1/usuarios/0")
+                .exchange()
+                .expectStatus().isNotFound()
+                .expectBody(ErrorMessage.class)
+                .returnResult().getResponseBody();
+
+        org.assertj.core.api.Assertions.assertThat(responseBody).isNotNull();
+        org.assertj.core.api.Assertions.assertThat(responseBody.getStatus()).isEqualTo(404);
+    }
 }
