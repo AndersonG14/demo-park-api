@@ -21,8 +21,7 @@ public class UsuarioIT {
 
     @Autowired
     WebTestClient testClient;
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+
 
     @Test
     public void createUsuario_ComUsernameEPasswordValidos_RetornarUsuarioCriadoComStatus201() {
