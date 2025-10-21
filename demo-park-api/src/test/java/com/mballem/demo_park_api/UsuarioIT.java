@@ -261,7 +261,7 @@ public class UsuarioIT {
 
         responseBody = testClient
                 .patch()
-                .uri("/api/v1/usuarios/1011")
+                .uri("/api/v1/usuarios/100")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(new UsuarioSenhaDto("000000", "123456", "123456"))
                 .exchange()
