@@ -280,8 +280,7 @@ public class UsuarioIT {
 
     @Test
     public void listarUsuarios_SemQualquerParametro_RetornarListaDeUsuariosComStatus200() {
-        long totalDeUsuarios = usuarioRepository.count();
-        List<UsuarioResponseDto> responseBody = testClient
+        List<UsuarioResponseDto> responseBody =  testClient
                 .get()
                 .uri("/api/v1/usuarios")
                 .exchange()
