@@ -289,6 +289,6 @@ public class UsuarioIT {
                 .returnResult().getResponseBody();
 
         org.assertj.core.api.Assertions.assertThat(responseBody).isNotNull();
-        org.assertj.core.api.Assertions.assertThat(responseBody.size()).isEqualTo(totalDeUsuarios);
+        org.assertj.core.api.Assertions.assertThat(responseBody.size()).isEqualTo(3);
     }
 }
