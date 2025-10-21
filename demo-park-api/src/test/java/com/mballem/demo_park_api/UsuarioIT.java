@@ -279,7 +279,7 @@ public class UsuarioIT {
     }
 
     @Test
-    public void listarUsuarios_ComSucesso_RetornarListaComStatus200() {
+    public void listarUsuarios_SemQualquerParametro_RetornarListaDeUsuariosComStatus200() {
         long totalDeUsuarios = usuarioRepository.count();
         List<UsuarioResponseDto> responseBody = testClient
                 .get()
