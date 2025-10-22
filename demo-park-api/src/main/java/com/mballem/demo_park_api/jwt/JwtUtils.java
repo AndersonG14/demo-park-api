@@ -1,5 +1,7 @@
 package com.mballem.demo_park_api.jwt;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -51,5 +53,21 @@ public class JwtUtils {
 
     }
 
+    private static Claims getClaimsFromToken(String token){
+         try {
+             return Jwts.parserBuilder()
+                     .setSigningKey(generateKey()).build()
+                     .parseClaimsJws(refactorToken(token)).getBody();
+         } catch (JwtException ex) {
+             log.error(String.format("Token invalido %s", ex.getMessage()));
+         }
+    }
 
+    private static String refactorToken(String token){
+        if (token.contains(JWT_BEARER)){
+            return token.substring(JWT_BEARER.length());
+        }
+
+        return token;
+    }
 }
