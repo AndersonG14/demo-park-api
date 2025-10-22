@@ -69,7 +69,17 @@ public class JwtUtils {
 
     }
 
-
+    public static boolean isTokenValid(String token){
+        try {
+            Jwts.parserBuilder()
+                    .setSigningKey(generateKey()).build()
+                    .parseClaimsJws(refactorToken(token));
+            return true;
+        } catch (JwtException ex) {
+            log.error(String.format("Token invalido %s", ex.getMessage()));
+        }
+        return false;
+    }
 
     private static String refactorToken(String token){
         if (token.contains(JWT_BEARER)){
