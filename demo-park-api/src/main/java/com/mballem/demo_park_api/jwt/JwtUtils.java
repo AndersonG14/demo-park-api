@@ -61,6 +61,7 @@ public class JwtUtils {
          } catch (JwtException ex) {
              log.error(String.format("Token invalido %s", ex.getMessage()));
          }
+         return null;
     }
 
     private static String refactorToken(String token){
