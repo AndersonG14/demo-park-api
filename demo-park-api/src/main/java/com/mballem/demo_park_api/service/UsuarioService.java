@@ -58,6 +58,6 @@ public class UsuarioService {
     public Usuario buscarPorUsername(String username){
         return usuarioRepository.findByUsername(username).orElseThrow(
                 () -> new EntityNotFoundException(String.format("Usuário com '%s' não encontrado", username))
-        ):
+        );
     }
 }
