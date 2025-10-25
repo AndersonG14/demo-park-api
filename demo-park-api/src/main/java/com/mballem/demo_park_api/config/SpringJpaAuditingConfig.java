@@ -10,7 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import java.util.Optional;
 
 @Configuration
-EnableJpaAuditing
+@EnableJpaAuditing
 public class SpringJpaAuditingConfig implements AuditorAware<String> {
 
     @Override
