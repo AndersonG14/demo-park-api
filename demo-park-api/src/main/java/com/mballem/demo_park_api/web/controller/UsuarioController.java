@@ -51,6 +51,7 @@ public class UsuarioController {
     }
 
     @Operation(summary = "Recuperar um usuário pelo id", description = "Recuperar um usuário pelo id",
+            security = @SecurityRequirement(name = "security"),
             responses = {
                     @ApiResponse(responseCode = "200", description = "Recurso recuperado com sucesso",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = UsuarioResponseDto.class))),
@@ -68,6 +69,7 @@ public class UsuarioController {
     }
 
     @Operation(summary = "Atualizar senha", description = "Atualizar senha",
+            security = @SecurityRequirement(name = "security"),
             responses = {
                     @ApiResponse(responseCode = "204", description = "Senha atualizada com sucesso",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = Void.class))),
