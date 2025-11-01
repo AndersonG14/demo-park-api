@@ -153,7 +153,7 @@ public class UsuarioIT {
         UsuarioResponseDto responseBody = testClient
                 .get()
                 .uri("/api/v1/usuarios/100")
-                .header(JwtAuthentication.getHeaderAuthorization(testClient, "ana@email.com", "123456"))
+                .headers(JwtAuthentication.getHeaderAuthorization(testClient, "ana@email.com", "123456"))
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(UsuarioResponseDto.class)
