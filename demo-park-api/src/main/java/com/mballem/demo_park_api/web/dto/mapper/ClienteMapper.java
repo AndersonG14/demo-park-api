@@ -15,7 +15,7 @@ public class ClienteMapper {
         return new ModelMapper().map(dto, Cliente.class);
     }
 
-    public static Cliente toDto(Cliente cliente) {
+    public static ClienteResponseDto toDto(Cliente cliente) {
         return new ModelMapper().map(cliente, ClienteResponseDto.class);
     }
 }
