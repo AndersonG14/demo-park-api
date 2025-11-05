@@ -1,5 +1,4 @@
-package com.mballem.demo_park_api.web.dto.mapper;
-
+package com.mballem.demo_park_api.web.dto;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
