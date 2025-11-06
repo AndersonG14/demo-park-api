@@ -20,7 +20,8 @@ public class ClienteService {
         try {
             return clienteRepository.save(cliente);
         } catch (DataIntegrityViolationException ex) {
-            throw new CpfUniqueViolationException(String.format("CPF '%s' não pode ser cadastrado, já existe no sistema", cliente.getCpf()));
+            throw new CpfUniqueViolationException(
+                    String.format("CPF '%s' não pode ser cadastrado, já existe no sistema", cliente.getCpf()));
         }
     }
 }
