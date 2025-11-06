@@ -1,6 +1,7 @@
 package com.mballem.demo_park_api;
 
 import com.mballem.demo_park_api.jwt.JwtToken;
+import com.mballem.demo_park_api.web.dto.UsuarioLoginDto;
 import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.reactive.server.WebTestClient;
 

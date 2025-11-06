@@ -2,6 +2,7 @@ package com.mballem.demo_park_api;
 
 
 import com.mballem.demo_park_api.jwt.JwtToken;
+import com.mballem.demo_park_api.web.dto.UsuarioLoginDto;
 import com.mballem.demo_park_api.web.exception.ErrorMessage;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
