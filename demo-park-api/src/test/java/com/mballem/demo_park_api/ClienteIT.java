@@ -99,4 +99,21 @@ public class ClienteIT {
         org.assertj.core.api.Assertions.assertThat(responseBody.getStatus()).isEqualTo(422);
     }
 
+    @Test
+    public void criarCliente_ComUsuarioNaoPermitido_RetornarErrorMessageStatus403() {
+        ErrorMessage responseBody = testClient
+                .post()
+                .uri("/api/v1/clientes")
+                .contentType(MediaType.APPLICATION_JSON)
+                .headers(JwtAuthentication.getHeaderAuthorization(testClient, "ana@email.com", "123456"))
+                .bodyValue(new ClienteCreateDto("Tobias Ferreira", "21236159004"))
+                .exchange()
+                .expectStatus().isEqualTo(403)
+                .expectBody(ErrorMessage.class)
+                .returnResult().getResponseBody();
+
+        org.assertj.core.api.Assertions.assertThat(responseBody).isNotNull();
+        org.assertj.core.api.Assertions.assertThat(responseBody.getStatus()).isEqualTo(403);
+    }
+
 }
