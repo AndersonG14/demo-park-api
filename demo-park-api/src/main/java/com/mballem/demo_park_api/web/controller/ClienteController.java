@@ -45,9 +45,7 @@ public class ClienteController {
                     @ApiResponse(responseCode = "403", description = "Recurso não permitido ao perfil de AMDIN",
                             content = @Content(mediaType = "application/json;charset=UTF-8", schema = @Schema(implementation = ErrorMessage.class)))
 
-            }
-
-    )
+            })
 
     @PostMapping
     @PreAuthorize("hasRole('CLIENTE')")
