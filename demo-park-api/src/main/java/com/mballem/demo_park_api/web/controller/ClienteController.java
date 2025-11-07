@@ -57,7 +57,7 @@ public class ClienteController {
     }
 
     @Operation(summary = "Localizar um cliente", description = "Recurso para localizar um cliente pelo ID. " +
-            "Rquisição exige uso de um bearer token. Acesso restrito a Role='ADMIN' ",
+            "Rquisição exige uso de um bearer token. Acesso restrito a Role='ADMIN'",
             responses = {
                     @ApiResponse(responseCode = "200", description = "Recurso localizado com sucesso",
                             content = @Content(mediaType = "application/json;charset=UTF-8", schema = @Schema(implementation = ClienteResponseDto.class))),
