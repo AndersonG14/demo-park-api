@@ -7,6 +7,7 @@ import com.mballem.demo_park_api.exception.UsernameUniqueViolationException;
 import com.mballem.demo_park_api.jwt.JwtUtils;
 import com.mballem.demo_park_api.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,13 +24,17 @@ public class UsuarioService {
     @Transactional
     public Usuario salvar(Usuario usuario) {
         try {
+            if (usuario.getRole() == null) {
+                usuario.setRole(Usuario.Role.ROLE_CLIENTE);
+            }
             usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
             return usuarioRepository.save(usuario);
-        } catch (org.springframework.dao.DataIntegrityViolationException ex) {
-            throw new UsernameUniqueViolationException(String.format("Username {%s} já cadastrado", usuario.getUsername()));
+        } catch (DataIntegrityViolationException ex) {
+            throw new UsernameUniqueViolationException(
+                    String.format("Username {%s} já cadastrado", usuario.getUsername()));
         }
-
     }
+
 
     @Transactional(readOnly = true)
     public Usuario buscarPorId(Long id) {

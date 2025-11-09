@@ -21,6 +21,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Tag(name="Cliente", description = "Contém todas as operações relativas ao recurso de um cliente")
 @RequiredArgsConstructor
 @RestController
@@ -72,6 +74,14 @@ public class ClienteController {
     public ResponseEntity<ClienteResponseDto> getById(@PathVariable Long id){
         Cliente cliente = clienteService.buscarPorId(id);
         return ResponseEntity.ok(ClienteMapper.toDto(cliente));
+
+    }
+
+    @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<Cliente>> getAll(){
+        List<Cliente> clientes = clienteService.buscarTodos();
+        return ResponseEntity.ok(clientes);
 
     }
 }
