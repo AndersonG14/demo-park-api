@@ -43,8 +43,10 @@ public class ClienteController {
     private final UsuarioService usuarioService;
 
 
-    @Operation(summary = "Criar um novo cliente", description = "Recurso para criar um novo cliente vinculado a um usuário cadastrado. " +
+    @Operation(summary = "Criar um novo cliente",
+            description = "Recurso para criar um novo cliente vinculado a um usuário cadastrado. " +
             "Rquisição exige uso de um bearer token. Acesso restrito a Role='CLIENTE' ",
+            security = @SecurityRequirement(name = "security"),
             responses = {
                     @ApiResponse(responseCode = "201", description = "Recurso criado com sucesso",
                             content = @Content(mediaType = "application/json;charset=UTF-8", schema = @Schema(implementation = ClienteResponseDto.class))),
@@ -67,8 +69,10 @@ public class ClienteController {
         return ResponseEntity.status(201).body(ClienteMapper.toDto(cliente));
     }
 
-    @Operation(summary = "Localizar um cliente", description = "Recurso para localizar um cliente pelo ID. " +
+    @Operation(summary = "Localizar um cliente",
+            description = "Recurso para localizar um cliente pelo ID. " +
             "Rquisição exige uso de um bearer token. Acesso restrito a Role='ADMIN'",
+            security = @SecurityRequirement(name = "security"),
             responses = {
                     @ApiResponse(responseCode = "200", description = "Recurso localizado com sucesso",
                             content = @Content(mediaType = "application/json;charset=UTF-8", schema = @Schema(implementation = ClienteResponseDto.class))),
@@ -100,7 +104,7 @@ public class ClienteController {
                             content = @Content(schema = @Schema(type = "integer", defaultValue = "20")),
                             description = "Reprensenta o total de elementos por página"
                     ),
-                    @Parameter(in =  QUERY, name = "sort",
+                    @Parameter(in =  QUERY, name = "sort", hidden = true,
                             content = @Content(schema = @Schema(type = "string", defaultValue = "id,asc")),
                             description = "Reprensenta a ordenação dos resultados. Aceita multiplos critérios de ordenação são suportados."
                     )
@@ -119,7 +123,7 @@ public class ClienteController {
             })
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<PageableDto> getAll(Pageable pageable){
+    public ResponseEntity<PageableDto> getAll(@Parameter(hidden = true) Pageable pageable){
         Page<ClienteProjection> clientes = clienteService.buscarTodos(pageable);
         return ResponseEntity.ok(PageableMapper.toDto(clientes));
 
