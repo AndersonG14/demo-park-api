@@ -130,6 +130,19 @@ public class ClienteController {
 
     }
 
+    @Operation(summary = "Recuperar dados do cliente autenticado",
+            description = "Recurso para localizar um cliente pelo ID. " +
+                    "Rquisição exige uso de um bearer token. Acesso restrito a Role='CLIENTE'",
+            security = @SecurityRequirement(name = "security"),
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Recurso recuperado com sucesso",
+                            content = @Content(mediaType = "application/json;charset=UTF-8",
+                                    schema = @Schema(implementation = ClienteResponseDto.class))),
+                    @ApiResponse(responseCode = "403", description = "Recurso não permitido ao perfil de ADMIN",
+                            content = @Content(mediaType = "application/json;charset=UTF-8",
+                                    schema = @Schema(implementation = ErrorMessage.class)))
+
+            })
 
     @GetMapping("/detalhes")
     @PreAuthorize("hasRole('CLIENTES')")
