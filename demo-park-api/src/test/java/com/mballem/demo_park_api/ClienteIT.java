@@ -214,4 +214,23 @@ public class ClienteIT {
 
     }
 
+    @Test
+    public void buscarCliente_ComDadosDoTokenDeCliente_RetornarErrorMessageComStatus200() {
+        ClienteResponseDto responseBody = testClient
+                .get()
+                .uri("/api/v1/clientes/detalhes")
+                .headers(JwtAuthentication.getHeaderAuthorization(testClient, "bia@email.com", "123456"))
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(ClienteResponseDto.class)
+                .returnResult().getResponseBody();
+
+        org.assertj.core.api.Assertions.assertThat(responseBody).isNotNull();
+        org.assertj.core.api.Assertions.assertThat(responseBody.getCpf()).isEqualTo("24906635008");
+        org.assertj.core.api.Assertions.assertThat(responseBody.getNome()).isEqualTo("Bianca Silva");
+        org.assertj.core.api.Assertions.assertThat(responseBody.getId()).isEqualTo(10);
+
+
+    }
+
 }
