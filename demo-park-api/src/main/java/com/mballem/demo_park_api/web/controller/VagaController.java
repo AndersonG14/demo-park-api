@@ -61,7 +61,7 @@ public class VagaController {
             responses = {
                     @ApiResponse(responseCode = "200", description = "Recurso criado com sucesso",
                             content = @Content(mediaType = "application/json",
-                                    schema = @Schema(implementation = ErrorMessage.class))),
+                                    schema = @Schema(implementation = VagaResponseDto.class))),
                     @ApiResponse(responseCode = "404", description = "Vaga não localizada",
                             content = @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = ErrorMessage.class)))
