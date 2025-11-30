@@ -45,4 +45,33 @@ public class VagaIT {
                 .jsonPath("method").isEqualTo("POST")
                 .jsonPath("path").isEqualTo("/api/v1/vagas");
     }
+
+    @Test
+    public void criarVaga_ComDadosInvalidos_RetornarErrorMessageComStatus422(){
+        testClient
+                .post()
+                .uri("/api/v1/vagas")
+                .contentType(MediaType.APPLICATION_JSON)
+                .headers(JwtAuthentication.getHeaderAuthorization(testClient, "ana@email.com", "123456"))
+                .bodyValue(new VagasCreateDto("", ""))
+                .exchange()
+                .expectStatus().isEqualTo(409)
+                .expectBody()
+                .jsonPath("status").isEqualTo(422)
+                .jsonPath("method").isEqualTo("POST")
+                .jsonPath("path").isEqualTo("/api/v1/vagas");
+
+        testClient
+                .post()
+                .uri("/api/v1/vagas")
+                .contentType(MediaType.APPLICATION_JSON)
+                .headers(JwtAuthentication.getHeaderAuthorization(testClient, "ana@email.com", "123456"))
+                .bodyValue(new VagasCreateDto("A-501", "DESOCUPADA"))
+                .exchange()
+                .expectStatus().isEqualTo(409)
+                .expectBody()
+                .jsonPath("status").isEqualTo(422)
+                .jsonPath("method").isEqualTo("POST")
+                .jsonPath("path").isEqualTo("/api/v1/vagas");
+    }
 }
