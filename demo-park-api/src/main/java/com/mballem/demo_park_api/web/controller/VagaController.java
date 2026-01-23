@@ -35,6 +35,9 @@ public class VagaController {
             responses = {
                     @ApiResponse(responseCode = "201", description = "Recurso criado com sucesso",
                             headers = @Header(name = HttpHeaders.LOCATION, description = "URL do recurso criado")),
+                    @ApiResponse(responseCode = "403", description = "Recuroso não permitido ao perfil de CLIENTE",
+                            content = @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = ErrorMessage.class))),
                     @ApiResponse(responseCode = "409", description = "Vaga já cadastrada",
                             content = @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = ErrorMessage.class))),
@@ -62,6 +65,9 @@ public class VagaController {
                     @ApiResponse(responseCode = "200", description = "Recurso criado com sucesso",
                             content = @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = VagaResponseDto.class))),
+                    @ApiResponse(responseCode = "403", description = "Recurso não permitido ao perfil de CLIENTE",
+                            content = @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = ErrorMessage.class))),
                     @ApiResponse(responseCode = "404", description = "Vaga não localizada",
                             content = @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = ErrorMessage.class)))
