@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.headers.Header;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -32,6 +33,7 @@ public class VagaController {
 
     @Operation(summary = "Criar uma nova vaga", description = "Recurso para criar uma nova vaga." +
             "Requisição exige uso de um bearer tolen. Acesso restrito a Role='ADMIN'",
+            security = @SecurityRequirement(name = "security"),
             responses = {
                     @ApiResponse(responseCode = "201", description = "Recurso criado com sucesso",
                             headers = @Header(name = HttpHeaders.LOCATION, description = "URL do recurso criado")),
@@ -61,6 +63,7 @@ public class VagaController {
 
     @Operation(summary = "Localizar uma vaga", description = "Recurso para localizar uma vaga pelo seu código" +
             "Requisição exige uso de um bearer tolen. Acesso restrito a Role='ADMIN'",
+            security = @SecurityRequirement(name = "security"),
             responses = {
                     @ApiResponse(responseCode = "200", description = "Recurso criado com sucesso",
                             content = @Content(mediaType = "application/json",
