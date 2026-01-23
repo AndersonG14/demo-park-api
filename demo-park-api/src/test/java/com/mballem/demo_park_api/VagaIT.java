@@ -126,7 +126,7 @@ public class VagaIT {
                 .contentType(MediaType.APPLICATION_JSON)
                 .headers(JwtAuthentication.getHeaderAuthorization(
                         testClient, "bia@email.com", "123456"))
-                .bodyValue(new VagasCreateDto("A-99", "LIVRE"))
+                .bodyValue(new VagasCreateDto("A-05", "OCUPADA"))
                 .exchange()
                 .expectStatus().isForbidden()
                 .expectBody()
